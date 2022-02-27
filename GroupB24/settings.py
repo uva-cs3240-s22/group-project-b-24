@@ -17,7 +17,7 @@ https://docs.djangoproject.com/en/dev/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
->>>>>>> 8d4a8833ce2469efd874d353703b0fdc742f97df
+#>>>>>>> 8d4a8833ce2469efd874d353703b0fdc742f97df
 """
 
 from pathlib import Path
@@ -41,7 +41,7 @@ SECRET_KEY = 'django-insecure-j8ml3&6am0u)7*otv*f+)&^0d%byauf=!1fm0lhwegca@oe^t_
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
