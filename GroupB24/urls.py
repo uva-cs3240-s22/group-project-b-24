@@ -1,7 +1,11 @@
 """GroupB24 URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
+<<<<<<< HEAD
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
+=======
+    https://docs.djangoproject.com/en/dev/topics/http/urls/
+>>>>>>> 8d4a8833ce2469efd874d353703b0fdc742f97df
 Examples:
 Function views
     1. Add an import:  from my_app import views
