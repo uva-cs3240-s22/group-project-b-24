@@ -20,3 +20,6 @@ def listView(request):
     latest_recipe_list = Recipe.objects.order_by()
     context = {'latest_recipe_list': latest_recipe_list,}
     return render(request, 'WOMbasic/recipe.html', context)
+
+def welcomeView(request):
+    return render(request, 'WOMbasic/welcome.html')

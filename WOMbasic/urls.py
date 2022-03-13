@@ -6,4 +6,5 @@ app_name = "WOMbasic"
 urlpatterns = [
     path('recipe/list', views.listView, name='listView'),
     path('recipe/', views.insert, name='submit'),
+    path('', views.welcomeView, name='welcome'),
 ]
