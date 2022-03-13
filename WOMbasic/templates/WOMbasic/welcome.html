@@ -1,10 +1,17 @@
 <!DOCTYPE html>
+{% load socialaccount %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>B24 Project</title>
+    <title>Google Login</title>
 </head>
 <body>
-    welcome
+    <h1> Word of Mouth </h1>
+    {% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}!</p>
+
+    {% else %}
+    <a href="{% provider_login_url 'google' %}">Login with Google</a>
+    {% endif %}
 </body>
 </html>
