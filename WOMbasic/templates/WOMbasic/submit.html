@@ -1,0 +1,16 @@
+{% load static %}
+<link
+  rel="stylesheet"
+  type ="text/css"
+  href="{% static 'WOMbasic/css/bootstrap.css' %}"
+  />
+<form  method="post">
+{% csrf_token %}
+<fieldset>
+    <label for="recipe"> Recipe: </label><br>
+    <input type="text" name="recipe" id="recipe"  placeholder = "enter Recipe">
+</fieldset>
+<input type="submit" value="Submit">
+</form>
+
+ <a href="{% url 'WOMbasic:listView' %}"> List of Recipes</a>

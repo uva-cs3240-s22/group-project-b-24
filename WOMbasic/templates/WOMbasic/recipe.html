@@ -1,0 +1,17 @@
+{% load static %}
+<link
+  rel="stylesheet"
+  type ="text/css"
+  href="{% static 'WOMbasic/css/bootstrap.css' %}"
+  />
+{% if latest_recipe_list %}
+    <ul>
+    {% for rec in latest_recipe_list %}
+        <li>{{ rec.recipe_text }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No recipes are available.</p>
+{% endif %}
+
+<a href="{% url 'WOMbasic:submit' %}"> Enter new recipe</a>
