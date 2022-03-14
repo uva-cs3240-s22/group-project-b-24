@@ -100,10 +100,10 @@ WSGI_APPLICATION = 'GroupB24.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "b24",
-        "USER": "b24user",
-        "PASSWORD": "b24",
-        "HOST": "127.0.0.1",
+        "NAME": "dc5epkeba02a4o",
+        "USER": "hessejkhzrdpnc",
+        "PASSWORD": "ec093e49ea7a4351a1cf7ac1f9d51640610bfeeaee711a61f2c77a84cb757d7b",
+        "HOST": "ec2-54-158-26-89.compute-1.amazonaws.com",
         "PORT": "5432",
     }
 }
