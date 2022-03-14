@@ -24,7 +24,7 @@ from pathlib import Path
 import sys
 import django_heroku
 
-django_heroku.settings(locals(), test_runner=False)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -179,4 +179,4 @@ STATIC_URL = 'static/'
 #>>>>>>> 8d4a8833ce2469efd874d353703b0fdc742f97df
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-django_heroku.settings(locals())
+django_heroku.settings(locals(), test_runner=False)
