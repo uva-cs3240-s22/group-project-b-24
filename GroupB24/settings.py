@@ -98,9 +98,13 @@ WSGI_APPLICATION = 'GroupB24.wsgi.application'
 #>>>>>>> 8d4a8833ce2469efd874d353703b0fdc742f97df
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "b24",
+        "USER": "b24user",
+        "PASSWORD": "b24",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
 }
 
