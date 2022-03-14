@@ -21,8 +21,9 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 from pathlib import Path
+import sys
 import django_heroku
-import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -106,9 +107,14 @@ DATABASES = {
         "PASSWORD": "ec093e49ea7a4351a1cf7ac1f9d51640610bfeeaee711a61f2c77a84cb757d7b",
         "HOST": "ec2-54-158-26-89.compute-1.amazonaws.com",
         "PORT": "5432",
+        "TEST": {
+            "NAME": "testdb",
+        },
     }
 }
 
+if 'test' in sys.argv or 'test_coverage' in sys.argv:
+    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
 
 # Password validation
 #<<<<<<< HEAD
