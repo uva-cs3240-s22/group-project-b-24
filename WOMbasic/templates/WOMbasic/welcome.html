@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 {% load socialaccount %}
 <html lang="en">
+{% load static %}
+<link
+  rel="stylesheet"
+  type ="text/css"
+  href="{% static 'WOMbasic/css/bootstrap.css' %}"
+  />
 <head>
     <meta charset="UTF-8">
     <title>Google Login</title>
 </head>
 <body>
+    <ul class="nav nav-tabs justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'WOMbasic:welcome' %}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'WOMbasic:submit' %}">Add New</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Settings</a>
+        </li>
+    </ul>
     <h1> Word of Mouth </h1>
     {% if user.is_authenticated %}
     <p>Welcome, {{ user.username }}!</p>
+    <p> <a href="{% url 'WOMbasic:submit' %}"> Create New Recipe</a></p>
+
 
     {% else %}
     <a href="{% provider_login_url 'google' %}">Login with Google</a>
