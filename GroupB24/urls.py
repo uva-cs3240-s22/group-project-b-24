@@ -1,11 +1,7 @@
 """GroupB24 URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-<<<<<<< HEAD
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
-=======
     https://docs.djangoproject.com/en/dev/topics/http/urls/
->>>>>>> 8d4a8833ce2469efd874d353703b0fdc742f97df
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -18,9 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
 
 urlpatterns = [
-    path('WOMbasic/', include('WOMbasic.urls')),
+    path('', include('WOMbasic.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
 ]
