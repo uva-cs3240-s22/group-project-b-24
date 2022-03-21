@@ -15,4 +15,3 @@ django-allauth
 
 psycopg2
 
-main
