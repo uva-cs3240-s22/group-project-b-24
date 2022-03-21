@@ -178,7 +178,6 @@ STATIC_URL = 'static/'
 #>>>>>>> 8d4a8833ce2469efd874d353703b0fdc742f97df
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-adddelete
 django_heroku.settings(locals())
 
 AUTHENTICATION_BACKENDS = [
