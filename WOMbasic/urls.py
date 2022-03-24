@@ -5,7 +5,7 @@ from .views import HomeView
 
 app_name = "WOMbasic"
 urlpatterns = [
-    path('recipe/list', views.listView, name='listView'),
-    path('recipe/', views.insert, name='submit'),
     path('', views.HomeView.as_view(), name='home'),
+    path('recipe/<int:pk>', views.RecipeDetailView.as_view(), name='recipe-details'),
+    path('submit/', views.insert, name='submit')
 ]

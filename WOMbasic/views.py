@@ -17,10 +17,9 @@ def insert(request):
         return render(request, 'WOMbasic/recipe/list.html')
 
 
-def listView(request):
-    latest_recipe_list = Recipe.objects.order_by()
-    context = {'latest_recipe_list': latest_recipe_list,}
-    return render(request, 'WOMbasic/recipe.html', context)
+class RecipeDetailView(DetailView):
+    model = Recipe
+    template_name = 'WOMbasic/recipe_details.html'
 
 class HomeView(ListView):
     model = Recipe
