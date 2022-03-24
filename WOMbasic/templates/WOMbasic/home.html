@@ -9,12 +9,18 @@
   />
 <head>
     <meta charset="UTF-8">
-    <title>Google Login</title>
+    <title>Home</title>
 </head>
+
+{% for recipe in object_list %}
+    {{ recipe.recipe_name }}
+    {{ recipe.publisher }}
+    {{ recipe.recipe_description }}
+{% endfor %}
 <body>
     <ul class="nav nav-tabs justify-content-end">
         <li class="nav-item">
-            <a class="nav-link active" href="{% url 'WOMbasic:welcome' %}">Home</a>
+            <a class="nav-link active" href="{% url 'WOMbasic:home' %}">Home</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'WOMbasic:submit' %}">Add New</a>
