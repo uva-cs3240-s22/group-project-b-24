@@ -1,24 +1,14 @@
+{% extends 'base_template.html' %}
 {% load static %}
-<link
-  rel="stylesheet"
-  type ="text/css"
-  href="{% static 'WOMbasic/css/bootstrap.css' %}"
-  />
-<ul class="nav nav-tabs justify-content-end">
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'WOMbasic:home' %}">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="{% url 'WOMbasic:submit' %}">Add New</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Profile</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Settings</a>
-        </li>
-    </ul>
-<form>
+
+
+{% block content %}
+
+<br>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <!--
   <div class="form-group">
     <label for="nameOfRecipe">Recipe Name</label>
     <input type="text" class="form-control" id="nameOfRecipe">
@@ -38,11 +28,9 @@
 
     </form>
   </div>
+  -->
     <input type="submit" value="Submit">
 </form>
+ <a href="{% url 'WOMbasic:home' %}"> List of Recipes</a>
 
-
-
-
-
- <a href="{% url 'WOMbasic:listView' %}"> List of Recipes</a>
+{% endblock %}
