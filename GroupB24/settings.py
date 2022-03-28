@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 from pathlib import Path
 import sys
-import django_heroku
+#import django_heroku
 import os
 
 
@@ -178,7 +178,7 @@ STATIC_URL = 'static/'
 #>>>>>>> 8d4a8833ce2469efd874d353703b0fdc742f97df
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -208,4 +208,4 @@ SOCIALACCOUNT_PROVIDERS = {
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-django_heroku.settings(locals(), test_runner=False)
+#django_heroku.settings(locals(), test_runner=False)
