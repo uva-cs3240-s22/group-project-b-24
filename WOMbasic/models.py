@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
 from django.urls import reverse
+from PIL import Image
 # Create your models here.
 class Recipe(models.Model):
     publisher = models.ForeignKey(User, on_delete=models.CASCADE)
