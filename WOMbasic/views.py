@@ -8,6 +8,7 @@ class SubmitRecipe(CreateView):
     model = Recipe
     template_name = 'WOMbasic/submit.html'
     fields = '__all__'
+    success_url = reverse_lazy('WOMbasic:home')
 
 class RecipeDetailView(DetailView):
     model = Recipe
