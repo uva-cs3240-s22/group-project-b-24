@@ -46,7 +46,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'WOMbasic',
     'bootstrap5',
-    'WOMbasic.apps.WombasicConfig',
+ #   'WOMbasic.apps.WombasicConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
