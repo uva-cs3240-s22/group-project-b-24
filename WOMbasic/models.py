@@ -6,9 +6,9 @@ from PIL import Image
 # Create your models here.
 class Recipe(models.Model):
     publisher = models.ForeignKey(User, on_delete=models.CASCADE)
-    recipe_name = models.CharField(max_length=200, default="")
+    recipe_name = models.CharField(max_length=200)
     date_published = models.DateTimeField(default=datetime.now)
-    recipe_description = models.TextField(default="")
+    recipe_description = models.TextField()
     recipe_image = models.ImageField(null=True, blank=True, upload_to="images/")
 
     def __str__(self):
