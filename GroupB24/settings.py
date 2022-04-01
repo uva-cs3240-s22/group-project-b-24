@@ -19,7 +19,9 @@ import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR / 'db.sqlite3'
 
 
 # Quick-start development settings - unsuitable for production
@@ -32,7 +34,7 @@ SECRET_KEY = 'django-insecure-xk)-_96=6fu!4kxi2+1id@!eb@qgarxd*t9#my@1hy)6ow*41@
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-j8ml3&6am0u)7*otv*f+)&^0d%byauf=!1fm0lhwegca@oe^t_'
+#SECRET_KEY = 'django-insecure-j8ml3&6am0u)7*otv*f+)&^0d%byauf=!1fm0lhwegca@oe^t_'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -44,9 +46,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'WOMbasic',
     'bootstrap5',
- #   'WOMbasic.apps.WombasicConfig',
+    'WOMbasic.apps.WombasicConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from PIL import Image
 # Create your models here.
+
 class Recipe(models.Model):
     publisher = models.ForeignKey(User, on_delete=models.CASCADE)
     recipe_name = models.CharField(max_length=200, null=True)
