@@ -1,58 +1,33 @@
+{% extends 'base_template.html' %}
 {% load static %}
-<link
-  rel="stylesheet"
-  type ="text/css"
-  href="{% static 'WOMbasic/css/bootstrap.css' %}"
-  />
-<ul class="nav nav-tabs justify-content-end">
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'WOMbasic:welcome' %}">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="{% url 'WOMbasic:submit' %}">Add New</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Profile</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Settings</a>
-        </li>
-    </ul>
-<form>
+
+
+{% block content %}
+
+<br>
+<form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
+
   <div class="form-group">
-    <label for="exampleFormControlInput1">Email address</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+    <label for="nameOfRecipe">Recipe Name</label>
+    <input type="text" class="form-control" id="nameOfRecipe">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlSelect1">Example select</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
+    <label for="descriptionOfRecipe">Recipe Description</label>
+      <textarea class="form-control" id="descriptionOfRecipe" rows="3"></textarea>
   </div>
   <div class="form-group">
-    <label for="exampleFormControlSelect2">Example multiple select</label>
-    <select multiple class="form-control" id="exampleFormControlSelect2">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
+    <label for="ingredientList">Ingredients</label>
+    <input class="form-control" id="ingredientList">
+      <button type="button" class="btn btn-dark">Add Another Ingredient</button>
   </div>
   <div class="form-group">
-    <label for="exampleFormControlTextarea1">Example textarea</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <form method="POST" enctype="multipart/form-data">
+    </form>
   </div>
+
     <input type="submit" value="Submit">
 </form>
+ <a href="{% url 'WOMbasic:home' %}"> List of Recipes</a>
 
-
-
-
-
- <a href="{% url 'WOMbasic:listView' %}"> List of Recipes</a>
+{% endblock %}

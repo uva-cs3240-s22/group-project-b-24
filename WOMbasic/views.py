@@ -1,25 +1,24 @@
 from django.shortcuts import render
-
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
 from django.http import HttpResponse
 from . models import Recipe
+from django.urls import reverse_lazy
 
+class SubmitRecipe(CreateView):
+    model = Recipe
+    template_name = 'WOMbasic/submit.html'
+    fields = '__all__'
+    success_url = reverse_lazy('WOMbasic:home')
 
-def insert(request):
-    try:
-        sub_text = request.POST['recipe']
-    except KeyError:
-        sub_text = "oopsies"
-        return render(request, 'WOMbasic/submit.html')
-    else:
-        r = Recipe()
-        r.recipe_text = request.POST.get('recipe', "empty")
-        r.save()
-        return render(request, 'WOMbasic/submit.html')
+class RecipeDetailView(DetailView):
+    model = Recipe
+    template_name = 'WOMbasic/recipe_details.html'
 
-def listView(request):
-    latest_recipe_list = Recipe.objects.order_by()
-    context = {'latest_recipe_list': latest_recipe_list,}
-    return render(request, 'WOMbasic/recipe.html', context)
+class HomeView(ListView):
+    model = Recipe
+    template_name = 'WOMbasic/home.html'
 
-def welcomeView(request):
-    return render(request, 'WOMbasic/welcome.html')
+class DeleteRecipe(DeleteView):
+    model = Recipe
+    template_name = 'WOMbasic/delete_recipe.html'
+    success_url = reverse_lazy('WOMbasic:home')

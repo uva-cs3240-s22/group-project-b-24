@@ -1,0 +1,15 @@
+{% extends 'base_template.html' %}
+{% load socialaccount %}
+{% load static %}
+
+{% block content %}
+
+<div class="form-group">
+    <form method="POST">
+        {% csrf_token %}
+        <button class="btn btn-secondary">Delete Recipe</button>
+    </form>
+
+</div>
+
+{% endblock %}
