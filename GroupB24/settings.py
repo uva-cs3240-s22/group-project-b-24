@@ -206,6 +206,11 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = '/media'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+
+STATIC_FILES_DIRS = (
+    os.path.join(BASE_DIR, 'static')
+)
+
 django_heroku.settings(locals(), test_runner=False)
