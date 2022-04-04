@@ -19,3 +19,5 @@ Pillow
 
 django-storages
 
+boto3
+
