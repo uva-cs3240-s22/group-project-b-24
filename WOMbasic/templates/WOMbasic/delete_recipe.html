@@ -4,12 +4,14 @@
 
 {% block content %}
 
-<div class="form-group">
-    <form method="POST">
-        {% csrf_token %}
-        <button class="btn btn-secondary">Delete Recipe</button>
-    </form>
 
+<div class = "position-absolute top-50 start-50">
+    Are you sure you want to delete?
+    <div class="form-group">
+        <form method="POST">
+            {% csrf_token %}
+            <button class="btn btn-secondary">Delete Recipe</button>
+        </form>
+    </div>
 </div>
-
 {% endblock %}
