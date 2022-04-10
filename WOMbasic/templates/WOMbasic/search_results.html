@@ -1,0 +1,24 @@
+{% extends 'base_template.html' %}
+{% load socialaccount %}
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+{% block content %}
+    {% if searched %}
+        <h1>You Searched For {{ searched }}</h1>
+        {% for search in results %}
+            <li>{{ search }}</li>
+        {% endfor %}
+
+    {% else %}
+        <h1>Error: Did Not Search for Anything</h1>
+    {% endif %}
+
+
+
+
+
+
+{% endblock %}

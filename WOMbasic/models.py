@@ -13,6 +13,8 @@ class Recipe(models.Model):
     recipe_description = models.TextField(default="")
     recipe_image = models.ImageField(null=True, blank=True, upload_to="images/", default="media/images/default_image.png")
 
+    objects = models.Manager()
+
     def __str__(self):
         return self.recipe_name
 

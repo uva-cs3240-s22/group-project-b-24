@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, FormView
 from django.http import HttpResponse
 from . models import Recipe
 from . forms import RecipeForm
@@ -28,4 +28,13 @@ class DeleteRecipe(DeleteView):
     model = Recipe
     template_name = 'WOMbasic/delete_recipe.html'
     success_url = reverse_lazy('WOMbasic:home')
+
+
+def search_results(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        results = Recipe.objects.filter(recipe_name__contains=searched, recipe_description__contains=searched)
+        return render(request, 'WOMbasic/search_results.html', {'searched': searched, 'results': results})
+    else:
+        return render(request, 'WOMbasic/search_results.html', {})
 

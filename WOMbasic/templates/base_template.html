@@ -15,13 +15,14 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
+
             <a class="navbar-brand" href="{% url 'WOMbasic:home' %}">Word of Mouth</a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pages" aria-controls="pages" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="pages">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'WOMbasic:home' %}">Home</a>
                     </li>
@@ -33,6 +34,15 @@
                     </li>
                 </ul>
             </div>
+
+             <div>
+                <form class="d-flex" method=POST action="{% url 'WOMbasic:search-results' %}">
+                    {% csrf_token %}
+                    <input class="form-control me-2" type="search" placeholder="Search by Recipe or Creator" aria-label="Search" name="searched">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+
         </div>
     </nav>
     {% block content %}
