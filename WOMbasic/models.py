@@ -11,7 +11,7 @@ class Recipe(models.Model):
     publisher = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
     date_published = models.DateTimeField(default=datetime.now)
     recipe_description = models.TextField(default="")
-    recipe_image = models.ImageField(null=True, blank=True, upload_to="images/")
+    recipe_image = models.ImageField(null=True, blank=True, upload_to="images/", default="media/images/default_image.png")
 
     def __str__(self):
         return self.recipe_name
