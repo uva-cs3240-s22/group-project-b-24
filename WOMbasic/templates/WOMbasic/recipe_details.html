@@ -11,19 +11,16 @@
 {% block content %}
 <h1> {{ recipe.recipe_name }}</h1>
 <small>By: {{ recipe.publisher.email }}</small><br/>
-<hr> <
+<hr> <!--
 {% if recipe.recipe_image is not None %}
     <img src = "{{ recipe.recipe_image.url }}">
 <br>
-{% endif %}
+{% endif %} -->
 {{ recipe.recipe_description }}
 <br><br>
 <small>
 <a class="btn btn-dark btn-sm" href="{% url 'WOMbasic:home' %}">Back to Home</a>
+<a class="btn btn-danger btn-sm" href="{% url 'WOMbasic:delete' recipe.pk %}">Delete Recipe</a>
 </small>
-
-{% if recipe.publisher.email == user.email %}
-    <a class="btn btn-danger btn-sm" href="{% url 'WOMbasic:delete' recipe.pk %}">Delete Recipe</a>
-{% endif %}
 {% endblock %}
 </body>
