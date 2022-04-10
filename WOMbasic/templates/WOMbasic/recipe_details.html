@@ -20,7 +20,9 @@
 <br><br>
 <small>
 <a class="btn btn-dark btn-sm" href="{% url 'WOMbasic:home' %}">Back to Home</a>
-<a class="btn btn-danger btn-sm" href="{% url 'WOMbasic:delete' recipe.pk %}">Delete Recipe</a>
 </small>
+{% if recipe.publisher.email == user.email %}
+    <a class="btn btn-danger btn-sm" href="{% url 'WOMbasic:delete' recipe.pk %}">Delete Recipe</a>
+{% endif %}
 {% endblock %}
 </body>
