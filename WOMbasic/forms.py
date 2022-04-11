@@ -1,15 +1,16 @@
 
 from django import forms
 from .models import Recipe
+from django.contrib.auth.models import User
 
 
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
-        fields = ('recipe_name', 'recipe_description', 'recipe_image')
+        fields = ('publisher', 'recipe_name', 'recipe_description', 'recipe_image')
 
         widgets = {
-            #   'publisher': forms.TextInput(attrs={'class': 'form-control'}),
+            'publisher': forms.TextInput(attrs={'class': 'form-control', 'value': '', 'id': 'pub', 'placeholder': 'user', 'type': 'hidden'}),
             'recipe_name': forms.TextInput(attrs={'class': 'form-control'}),
             'recipe_description': forms.Textarea(attrs={'class': 'form-control'}),
             'recipe_image': forms.FileInput(attrs={'class': 'form-control'}),

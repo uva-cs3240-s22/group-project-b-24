@@ -7,14 +7,20 @@
 <br>
 <div class="form-group">
   <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
+      {% csrf_token %}<!--
         Publisher:
       <input class="form-control" type="text" placeholder="{{user.email}}" readonly>
+      -->
+
       <p>{{ form.as_p }}</p>
       <button class="btn btn-secondary">Post Recipe</button>
   </form>
 </div>
-
  <a href="{% url 'WOMbasic:home' %}"> List of Recipes</a>
 
+
+<script>
+    var name = "{{ user.id }}";
+    document.getElementById("pub").value = name;
+</script>
 {% endblock %}
