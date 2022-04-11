@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 from pathlib import Path
 import sys
-import django_heroku
+#import django_heroku
 import os
 
 
@@ -180,7 +180,7 @@ USE_TZ = True
 #>>>>>>> 8d4a8833ce2469efd874d353703b0fdc742f97df
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -229,4 +229,4 @@ STATIC_URL = 'https://%s/%s/' %(AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 DEFAULT_FILE_STORAGE = 'GroupB24.storages.MediaStore'
 
 
-django_heroku.settings(locals(), test_runner=False, staticfiles=False)
+#django_heroku.settings(locals(), test_runner=False, staticfiles=False)

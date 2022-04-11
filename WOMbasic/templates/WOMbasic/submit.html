@@ -1,4 +1,5 @@
-{% extends 'base_template.html' %}
+
+{% extends "base_htmx.html" %}
 {% load static %}
 
 
@@ -12,7 +13,15 @@
       <button class="btn btn-secondary">Post Recipe</button>
   </form>
 </div>
-
+<div>
+  <h1>Add Ingredient</h1>
+    <button hx-get="{% url 'ingredients-form' %}" hx-swap="beforeend" hx-target="#ingredientforms">
+      Add Ingredient
+    </button>
+</div>
+<div id="ingredientforms">
+  
+</div>
  <a href="{% url 'WOMbasic:home' %}"> List of Recipes</a>
 
 {% endblock %}

@@ -12,7 +12,6 @@ class Recipe(models.Model):
     date_published = models.DateTimeField(default=datetime.now)
     recipe_description = models.TextField(default="")
     recipe_image = models.ImageField(null=True, blank=True, upload_to="images/", default="media/images/default_image.png")
-
     objects = models.Manager()
 
     def __str__(self):
@@ -20,3 +19,11 @@ class Recipe(models.Model):
 
     def get_absolute_url(self):
         return reverse('WOMbasic:recipe-details', args=(str(self.pk)))
+
+class Ingredients(models.Model):
+    recipe =  models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    serving_amount =  models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return self.name
