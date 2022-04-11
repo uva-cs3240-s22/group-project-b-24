@@ -9,4 +9,5 @@ urlpatterns = [
     path('submit/', views.SubmitRecipe.as_view(), name='submit'),
     path('recipe/<int:pk>/delete/', views.DeleteRecipe.as_view(), name='delete'),
     path('results/', views.search_results, name='search-results'),
+    path('prof/', views.Profile.as_view(), name='prof'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

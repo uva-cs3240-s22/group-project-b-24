@@ -6,6 +6,10 @@ from . forms import RecipeForm
 from django.urls import reverse_lazy
 
 
+class Profile(ListView):
+    model = Recipe
+    template_name = 'WOMbasic/prof.html'
+
 class SubmitRecipe(CreateView):
     model = Recipe
     form_class = RecipeForm
