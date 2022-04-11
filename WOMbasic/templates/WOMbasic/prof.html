@@ -1,0 +1,20 @@
+{% extends 'base_template.html' %}
+{% load socialaccount %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+
+{% block content %}
+<p>{{ user.username }}'s Recipes</p>
+<ul>
+    {% for recipe in object_list %}
+    {% if recipe.publisher.email == user.email %}
+    <li><a href="{% url 'WOMbasic:recipe-details' recipe.pk %}">{{ recipe.recipe_name }}</a> || {{ recipe.publisher }}<br>
+        {{ recipe.recipe_description }}</li>
+    {% endif %}
+    {% endfor %}
+</ul>
+{% endblock %}
