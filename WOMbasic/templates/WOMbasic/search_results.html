@@ -7,9 +7,21 @@
 </head>
 {% block content %}
     {% if searched %}
-        <h1>You Searched For {{ searched }}</h1>
+        <h1>You Searched For "{{ searched }}"</h1>
         {% for search in results %}
-            <li>{{ search }}</li>
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="{{ search.recipe_image.url }}" alt="media/images/default_image.png">
+              <div class="card-body">
+                <h5 class="card-title">{{ search.recipe_name }}</h5>
+                <p class="card-text">{{ search.recipe_description }}</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{ search.publisher.username }}</li>
+              </ul>
+              <div class="card-body">
+                <a href="{% url 'WOMbasic:recipe-details' search.pk %}" class="card-link">Go to recipe</a>
+              </div>
+            </div>
         {% endfor %}
 
     {% else %}

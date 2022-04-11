@@ -33,7 +33,7 @@ class DeleteRecipe(DeleteView):
 def search_results(request):
     if request.method == "POST":
         searched = request.POST['searched']
-        results = Recipe.objects.filter(recipe_name__contains=searched, recipe_description__contains=searched)
+        results = Recipe.objects.filter(recipe_name__contains=searched)
         return render(request, 'WOMbasic/search_results.html', {'searched': searched, 'results': results})
     else:
         return render(request, 'WOMbasic/search_results.html', {})
