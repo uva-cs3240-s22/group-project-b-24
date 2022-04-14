@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, FormView
+from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from django.http import HttpResponse
 from . models import Recipe
 from . forms import RecipeForm, ForkForm
@@ -34,11 +34,27 @@ class DeleteRecipe(DeleteView):
     success_url = reverse_lazy('WOMbasic:home')
 
 
-class ForkRecipe(CreateView):
-    model = Recipe
-    form_class = ForkForm
-    template_name = 'WOMbasic/forksubmit.html'
-    success_url = reverse_lazy('WOMbasic:home')
+#class ForkRecipe(CreateView):
+  # model = Recipe
+   # form_class = ForkForm
+   # template_name = 'WOMbasic/forksubmit.html'
+   # success_url = reverse_lazy('WOMbasic:home')
+
+
+def fork_recipe(request, pk1):
+    frec = Recipe.objects.get(pk=pk1)
+    frec_val = pk1
+    frec.pk = None
+
+    form = ForkForm(request.POST or None, instance=frec)
+
+    if form.is_valid():
+        form.instance.forked_fromId = pk1
+        form.instance.forked_from = Recipe.objects.get(pk=frec_val).recipe_name
+        form.save()
+        return redirect('WOMbasic:home')
+
+    return render(request, "WOMbasic/forksubmit.html", {'form': form})
 
 
 def search_results(request):

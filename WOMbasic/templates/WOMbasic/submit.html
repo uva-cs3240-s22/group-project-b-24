@@ -8,10 +8,7 @@
 
 <div class="form-group">
   <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}<!--
-        Publisher:
-      <input class="form-control" type="text" placeholder="{{user.email}}" readonly>
-      -->
+      {% csrf_token %}
 
       <p>{{ form.as_p }}</p>
       <button class="btn btn-secondary">Post Recipe</button>

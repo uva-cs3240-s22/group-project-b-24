@@ -13,6 +13,8 @@ class Recipe(models.Model):
     recipe_description = models.TextField(default="")
     recipe_image = models.ImageField(null=True, blank=True, upload_to="images/", default="images/default_image.png")
     forked = models.BooleanField(default=False)
+    forked_from = models.TextField(default="")
+    forked_fromId = models.IntegerField(default=1)
 
     objects = models.Manager()
 
