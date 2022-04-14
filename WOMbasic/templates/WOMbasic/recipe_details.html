@@ -9,8 +9,17 @@
 
 <body>
 {% block content %}
+
+
 <h1> {{ recipe.recipe_name }}</h1>
-<small>By: {{ recipe.publisher.email }}</small><br/>
+<small>By: {{ recipe.publisher.email }}</small>
+
+{% if recipe.forked %}
+<br/>
+<small>Recipe Forked from: <a href="{% url 'WOMbasic:recipe-details' recipe.forked_fromId %}">{{ recipe.forked_from }}</a></small>
+{% endif %}
+
+<br/>
 <hr>
 {% if recipe.recipe_image is not None %}
     <img src = "{{ recipe.recipe_image.url }}">
@@ -21,6 +30,7 @@
 <small>
 <a class="btn btn-dark btn-sm" href="{% url 'WOMbasic:home' %}">Back to Home</a>
 </small>
+<a class="btn btn-info btn-sm" href="{% url 'WOMbasic:fork-submit' recipe.pk %}">Fork Recipe</a>
 {% if recipe.publisher.email == user.email %}
     <a class="btn btn-danger btn-sm" href="{% url 'WOMbasic:delete' recipe.pk %}">Delete Recipe</a>
 {% endif %}
@@ -32,5 +42,6 @@
     {% csrf_token %}
     <button type="submit", name="recipe_id", value="{{ recipe.id }}", class="btn btn-primary btn-sm">Like</button> - {{ total_likes }} Likes
 </form>
+
 {% endblock %}
 </body>

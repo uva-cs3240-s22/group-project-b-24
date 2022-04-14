@@ -3,9 +3,10 @@
 
 
 {% block content %}
+
+
 <h1>Add Recipe... </h1>
 <br>
-
 <div class="form-group">
   <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
@@ -19,6 +20,7 @@
 <script>
     var name = "{{ user.id }}";
     document.getElementById("pub").value = name;
+
 
 </script>
 

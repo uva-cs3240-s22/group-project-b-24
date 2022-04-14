@@ -1,10 +1,12 @@
+
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, FormView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
 from django.http import HttpResponse
 from . models import Recipe
 from . forms import RecipeForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
+
 
 class Profile(ListView):
     model = Recipe
@@ -42,6 +44,29 @@ class DeleteRecipe(DeleteView):
     success_url = reverse_lazy('WOMbasic:home')
 
 
+#class ForkRecipe(CreateView):
+  # model = Recipe
+   # form_class = ForkForm
+   # template_name = 'WOMbasic/forksubmit.html'
+   # success_url = reverse_lazy('WOMbasic:home')
+
+
+def fork_recipe(request, pk1):
+    frec = Recipe.objects.get(pk=pk1)
+    frec_val = pk1
+    frec.pk = None
+
+    form = ForkForm(request.POST or None, instance=frec)
+
+    if form.is_valid():
+        form.instance.forked_fromId = pk1
+        form.instance.forked_from = Recipe.objects.get(pk=frec_val).recipe_name
+        form.save()
+        return redirect('WOMbasic:home')
+
+    return render(request, "WOMbasic/forksubmit.html", {'form': form})
+
+
 def search_results(request):
     if request.method == "POST":
         searched = request.POST['searched']
@@ -50,6 +75,7 @@ def search_results(request):
     else:
         return render(request, 'WOMbasic/search_results.html', {})
 
+      
 def LikeView(request, pk):
     recipe = get_object_or_404(Recipe, id=request.POST.get('recipe_id'))
     recipe.likes.add(request.user)
