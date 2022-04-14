@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, FormView
 from django.http import HttpResponse
 from . models import Recipe
-from . forms import RecipeForm
+from . forms import RecipeForm, ForkForm
 from django.urls import reverse_lazy
 
 
@@ -31,6 +31,13 @@ class HomeView(ListView):
 class DeleteRecipe(DeleteView):
     model = Recipe
     template_name = 'WOMbasic/delete_recipe.html'
+    success_url = reverse_lazy('WOMbasic:home')
+
+
+class ForkRecipe(CreateView):
+    model = Recipe
+    form_class = ForkForm
+    template_name = 'WOMbasic/forksubmit.html'
     success_url = reverse_lazy('WOMbasic:home')
 
 

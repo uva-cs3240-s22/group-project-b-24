@@ -12,6 +12,7 @@ class Recipe(models.Model):
     date_published = models.DateTimeField(default=datetime.now)
     recipe_description = models.TextField(default="")
     recipe_image = models.ImageField(null=True, blank=True, upload_to="images/", default="images/default_image.png")
+    forked = models.BooleanField(default=False)
 
     objects = models.Manager()
 
