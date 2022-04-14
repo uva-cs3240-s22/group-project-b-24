@@ -10,5 +10,9 @@ urlpatterns = [
     path('recipe/<int:pk>/delete/', views.DeleteRecipe.as_view(), name='delete'),
     path('results/', views.search_results, name='search-results'),
     path('prof/', views.Profile.as_view(), name='prof'),
+<<<<<<< HEAD
     path('like/<int:pk>', views.LikeView, name='like_recipe'),
+=======
+    path('forksubmit/<int:pk1>/', views.fork_recipe, name='fork-submit'),
+>>>>>>> searchfunction
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

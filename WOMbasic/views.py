@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, FormView
 from django.http import HttpResponse
@@ -5,6 +6,15 @@ from . models import Recipe
 from . forms import RecipeForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
+=======
+from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from django.http import HttpResponse
+from . models import Recipe
+from . forms import RecipeForm, ForkForm
+from django.urls import reverse_lazy
+
+>>>>>>> searchfunction
 
 class Profile(ListView):
     model = Recipe
@@ -40,6 +50,29 @@ class DeleteRecipe(DeleteView):
     model = Recipe
     template_name = 'WOMbasic/delete_recipe.html'
     success_url = reverse_lazy('WOMbasic:home')
+
+
+#class ForkRecipe(CreateView):
+  # model = Recipe
+   # form_class = ForkForm
+   # template_name = 'WOMbasic/forksubmit.html'
+   # success_url = reverse_lazy('WOMbasic:home')
+
+
+def fork_recipe(request, pk1):
+    frec = Recipe.objects.get(pk=pk1)
+    frec_val = pk1
+    frec.pk = None
+
+    form = ForkForm(request.POST or None, instance=frec)
+
+    if form.is_valid():
+        form.instance.forked_fromId = pk1
+        form.instance.forked_from = Recipe.objects.get(pk=frec_val).recipe_name
+        form.save()
+        return redirect('WOMbasic:home')
+
+    return render(request, "WOMbasic/forksubmit.html", {'form': form})
 
 
 def search_results(request):
