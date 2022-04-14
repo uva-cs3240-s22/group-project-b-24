@@ -15,8 +15,13 @@ class Recipe(models.Model):
     forked = models.BooleanField(default=False)
     forked_from = models.TextField(default="")
     forked_fromId = models.IntegerField(default=1)
+    likes = models.ManyToManyField(User, related_name='recipe_post')
+
 
     objects = models.Manager()
+
+    def total_likes(self):
+        return self.likes.count()
 
     def __str__(self):
         return self.recipe_name

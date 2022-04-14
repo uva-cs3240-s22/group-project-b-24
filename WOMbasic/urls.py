@@ -11,4 +11,5 @@ urlpatterns = [
     path('results/', views.search_results, name='search-results'),
     path('prof/', views.Profile.as_view(), name='prof'),
     path('forksubmit/<int:pk1>/', views.fork_recipe, name='fork-submit'),
+    path('like/<int:pk>', views.LikeView, name='like_recipe'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

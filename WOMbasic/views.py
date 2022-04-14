@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
 from django.http import HttpResponse
 from . models import Recipe
-from . forms import RecipeForm, ForkForm
-from django.urls import reverse_lazy
+from . forms import RecipeForm
+from django.urls import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
 
 
 class Profile(ListView):
@@ -21,6 +23,14 @@ class SubmitRecipe(CreateView):
 class RecipeDetailView(DetailView):
     model = Recipe
     template_name = 'WOMbasic/recipe_details.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(RecipeDetailView, self).get_context_data(*args, **kwargs)
+
+        stuff=get_object_or_404(Recipe, id=self.kwargs['pk'])
+        total_likes = stuff.total_likes()
+        context["total_likes"] = total_likes
+        return context
 
 
 class HomeView(ListView):
@@ -65,3 +75,8 @@ def search_results(request):
     else:
         return render(request, 'WOMbasic/search_results.html', {})
 
+      
+def LikeView(request, pk):
+    recipe = get_object_or_404(Recipe, id=request.POST.get('recipe_id'))
+    recipe.likes.add(request.user)
+    return HttpResponseRedirect(reverse('WOMbasic:recipe-details', args=[str(pk)]))

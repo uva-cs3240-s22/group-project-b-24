@@ -35,6 +35,13 @@
     <a class="btn btn-danger btn-sm" href="{% url 'WOMbasic:delete' recipe.pk %}">Delete Recipe</a>
 {% endif %}
 
+<br/><br/>
+<hr>
+<br/>
+<form action="{% url 'WOMbasic:like_recipe' recipe.pk %}" method="POST">
+    {% csrf_token %}
+    <button type="submit", name="recipe_id", value="{{ recipe.id }}", class="btn btn-primary btn-sm">Like</button> - {{ total_likes }} Likes
+</form>
 
 {% endblock %}
 </body>
