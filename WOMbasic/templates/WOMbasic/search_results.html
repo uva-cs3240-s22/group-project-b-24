@@ -6,10 +6,12 @@
     <title>Home</title>
 </head>
 {% block content %}
+{% if user.is_authenticated %}
     {% if searched %}
         <h1>You Searched For "{{ searched }}"</h1>
+<div class="row justify-content-center">
         {% for search in results %}
-            <div class="card" style="width: 18rem;">
+            <div class="card mt-3 mx-3" style="width: 26rem;">
               <img class="card-img-top" src="{{ search.recipe_image.url }}" alt="media/images/default_image.png">
               <div class="card-body">
                 <h5 class="card-title">{{ search.recipe_name }}</h5>
@@ -23,14 +25,14 @@
               </div>
             </div>
         {% endfor %}
-
+</div>
     {% else %}
         <h1>Error: Did Not Search for Anything</h1>
     {% endif %}
 
 
 
-
+{% endif %}
 
 
 {% endblock %}

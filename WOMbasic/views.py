@@ -1,20 +1,9 @@
-<<<<<<< HEAD
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, FormView
-from django.http import HttpResponse
-from . models import Recipe
-from . forms import RecipeForm
-from django.urls import reverse_lazy, reverse
-from django.http import HttpResponseRedirect
-=======
-from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
 from . models import Recipe
 from . forms import RecipeForm, ForkForm
-from django.urls import reverse_lazy
-
->>>>>>> searchfunction
+from django.urls import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
 
 class Profile(ListView):
     model = Recipe
@@ -83,6 +72,7 @@ def search_results(request):
     else:
         return render(request, 'WOMbasic/search_results.html', {})
 
+      
 def LikeView(request, pk):
     recipe = get_object_or_404(Recipe, id=request.POST.get('recipe_id'))
     recipe.likes.add(request.user)
