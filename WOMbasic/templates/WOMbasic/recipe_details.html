@@ -10,7 +10,7 @@
 <body>
 {% block content %}
 
-
+{% if user.is_authenticated %}
 <h1> {{ recipe.recipe_name }}</h1>
 <small>By: {{ recipe.publisher.email }}</small>
 
@@ -42,6 +42,6 @@
     {% csrf_token %}
     <button type="submit" name="recipe_id" value="{{ recipe.id }}" class="btn btn-primary btn-sm">Like</button> - {{ total_likes }} Likes
 </form>
-
+{% endif %}
 {% endblock %}
 </body>
