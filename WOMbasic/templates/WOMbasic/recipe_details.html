@@ -40,7 +40,7 @@
 <br/>
 <form action="{% url 'WOMbasic:like_recipe' recipe.pk %}" method="POST">
     {% csrf_token %}
-    <button type="submit", name="recipe_id", value="{{ recipe.id }}", class="btn btn-primary btn-sm">Like</button> - {{ total_likes }} Likes
+    <button type="submit" name="recipe_id" value="{{ recipe.id }}" class="btn btn-primary btn-sm">Like</button> - {{ total_likes }} Likes
 </form>
 
 {% endblock %}
