@@ -1,0 +1,42 @@
+{% extends 'base_template.html' %}
+{% load socialaccount %}
+{% load static %}
+
+
+
+
+{% block content %}
+<br>
+<h1>
+    <p class="text-center">Recipes by {{view.uname}} </p>
+</h1>
+<div class="row justify-content-center">
+    {% for recipe in object_list %}
+        {% if recipe.publisher.username == view.uname %}
+            <div class="card mt-3 mx-3" style="width: 26rem;">
+              <img class="card-img-top" src="{{ recipe.recipe_image.url }}" alt='no file'>
+
+              <div class="card-body">
+                <h5 class="card-title">{{ recipe.recipe_name }}</h5>
+                <p class="card-text">{{ recipe.recipe_description }}</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <a href="{% url 'WOMbasic:prof' recipe.publisher.username %}" class="card-link">{{recipe.publisher.username}}</a>
+              </ul>
+                <ul class="list-group list-group-flush align-items-center">
+                    {% if recipe.total_likes is 1 %}
+                    <li class="list-group-item">{{ recipe.total_likes }} Like</li>
+                    {% else %}
+                    <li class="list-group-item">{{ recipe.total_likes }} Likes</li>
+                    {% endif %}
+              </ul>
+              <div class="card-body">
+                <a href="{% url 'WOMbasic:recipe-details' recipe.pk %}" class="card-link">Go to recipe</a>
+              </div>
+            </div>
+            <br>
+        {% endif %}
+    {% endfor %}
+</div>
+
+{% endblock %}

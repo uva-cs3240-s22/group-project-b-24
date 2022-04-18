@@ -1,9 +1,26 @@
-from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, FormView
-from django.http import HttpResponse
-from .models import Ingredients, Recipe
-from .forms import RecipeForm , IngredientsFormSet, IngredientsForm
+from django.db.models import Q
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
+from . models import Recipe
+from . forms import RecipeForm
 from django.urls import reverse_lazy
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
+from . forms import RecipeForm, ForkForm
+from django.urls import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
+
+class Profile(ListView):
+    model = Recipe
+    template_name = 'WOMbasic/prof.html'
+
+    def get_name(self):
+        name = self.request.GET.get('username')
+        return name
+
+    def dispatch(self, request, *args, **kwargs):
+        self. uname = kwargs.get('username', "any_default")
+        return super(Profile, self).dispatch(request, *args, **kwargs)
 
 
 class SubmitRecipe(CreateView):
@@ -18,6 +35,14 @@ class RecipeDetailView(DetailView):
     model = Recipe
     template_name = 'WOMbasic/recipe_details.html'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(RecipeDetailView, self).get_context_data(*args, **kwargs)
+
+        stuff=get_object_or_404(Recipe, id=self.kwargs['pk'])
+        total_likes = stuff.total_likes()
+        context["total_likes"] = total_likes
+        return context
+
 
 class HomeView(ListView):
     model = Recipe
@@ -30,36 +55,38 @@ class DeleteRecipe(DeleteView):
     success_url = reverse_lazy('WOMbasic:home')
 
 
+#class ForkRecipe(CreateView):
+  # model = Recipe
+   # form_class = ForkForm
+   # template_name = 'WOMbasic/forksubmit.html'
+   # success_url = reverse_lazy('WOMbasic:home')
+
+
+def fork_recipe(request, pk1):
+    frec = Recipe.objects.get(pk=pk1)
+    frec_val = pk1
+    frec.pk = None
+
+    form = ForkForm(request.POST or None, instance=frec)
+
+    if form.is_valid():
+        form.instance.forked_fromId = pk1
+        form.instance.forked_from = Recipe.objects.get(pk=frec_val).recipe_name
+        form.save()
+        return redirect('WOMbasic:home')
+
+    return render(request, "WOMbasic/forksubmit.html", {'form': form})
+
+
 def search_results(request):
     if request.method == "POST":
         searched = request.POST['searched']
-        results = Recipe.objects.filter(recipe_name__contains=searched, recipe_description__contains=searched)
+        results = Recipe.objects.filter(Q(recipe_name__icontains=searched) | Q(publisher__username__icontains=searched))
         return render(request, 'WOMbasic/search_results.html', {'searched': searched, 'results': results})
     else:
         return render(request, 'WOMbasic/search_results.html', {})
 
-def create_Ingredients(request, pk):
-    recipe = Recipe.objects.get(pk=pk)
-    ingredients = Ingredients.objects.filter(recipe=recipe)
-    formset = IngredientsFormSet(request.POST or None)
-
-    if request.method == "POST":
-        if formset.is_valid():
-            formset.instance = recipe
-            formset.save()
-            return redirect('WOMbasic/submit.html', pk=recipe.id)
-
-    context = {
-        "formset": formset,
-        "recipe": recipe,
-        "ingredient": ingredients
-    }
-
-    return render(request, 'submit.html', context)
-
-def create_ingredients_form(request):
-    form = IngredientsForm()
-    context = {
-        "form": form
-    }
-    return render(request, "partials/ingredients_form.html", context)
+def LikeView(request, pk):
+    recipe = get_object_or_404(Recipe, id=request.POST.get('recipe_id'))
+    recipe.likes.add(request.user)
+    return HttpResponseRedirect(reverse('WOMbasic:recipe-details', args=[str(pk)]))

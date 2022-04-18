@@ -10,12 +10,25 @@
 <body>
 {% block content %}
 <h1> {{ recipe.recipe_name }}</h1>
-<small>By: {{ recipe.publisher.email }}</small><br/>
-<hr> <!--
+ <a class="nav-link" href="{% url 'WOMbasic:prof' recipe.publisher.username %}">{{recipe.publisher.username}}</a>
+<small>By: {{ recipe.publisher.email }}</small>
+
+{% if recipe.forked %}
+<br/>
+<small>Recipe Forked from: <a href="{% url 'WOMbasic:recipe-details' recipe.forked_fromId %}">{{ recipe.forked_from }}</a></small>
+{% endif %}
+<br>
+<form action="{% url 'WOMbasic:like_recipe' recipe.pk %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" name="recipe_id" value="{{ recipe.id }}" class="btn btn-primary btn-sm">Like</button> - {{ total_likes }} Likes
+</form>
+
+<br/>
+<hr>
 {% if recipe.recipe_image is not None %}
     <img src = "{{ recipe.recipe_image.url }}">
 <br>
-{% endif %} -->
+{% endif %}
 {{ recipe.recipe_description }}
 <br><br>
 <small>

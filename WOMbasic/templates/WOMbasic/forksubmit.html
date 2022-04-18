@@ -1,13 +1,12 @@
-
-{% extends "base_htmx.html" %}
+{% extends 'base_template.html' %}
 {% load static %}
 
 
 {% block content %}
+
 {% if user.is_authenticated %}
 <h1>Add Recipe... </h1>
 <br>
-
 <div class="form-group">
   <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
@@ -20,7 +19,6 @@
 <script>
     var name = "{{ user.id }}";
     document.getElementById("pub").value = name;
-
 </script>
 {% endif %}
 {% endblock %}
