@@ -46,8 +46,7 @@
 No Comments Yet<a href="{% url 'WOMbasic:add_comment' recipe.pk %}">
 Add Comment</a>
 {% else %}
-{% for comment in
-recipe.comments.all %}
+{% for comment in recipe.comments.all %}
 <strong>
 {{ comment.name }} -
 {{ comment.date_added}}
