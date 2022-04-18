@@ -1,8 +1,8 @@
-
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, DeleteView
 from django.http import HttpResponse
-from . models import Recipe, Profile
+from . models import Recipe
 from . forms import RecipeForm
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
@@ -83,11 +83,10 @@ def fork_recipe(request, pk1):
 def search_results(request):
     if request.method == "POST":
         searched = request.POST['searched']
-        results = Recipe.objects.filter(recipe_name__contains=searched)
+        results = Recipe.objects.filter(Q(recipe_name__icontains=searched) | Q(publisher__username__icontains=searched))
         return render(request, 'WOMbasic/search_results.html', {'searched': searched, 'results': results})
     else:
         return render(request, 'WOMbasic/search_results.html', {})
-
 
 def LikeView(request, pk):
     recipe = get_object_or_404(Recipe, id=request.POST.get('recipe_id'))

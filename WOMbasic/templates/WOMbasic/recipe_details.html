@@ -10,7 +10,8 @@
 <body>
 {% block content %}
 <h1> {{ recipe.recipe_name }}</h1>
-<small>By: {{ recipe.publisher.email }}</small><br/>
+ <a class="nav-link" href="{% url 'WOMbasic:prof' recipe.publisher.username %}">{{recipe.publisher.username}}</a>
+<br/>
 <hr>
 {% if recipe.recipe_image is not None %}
     <img src = "{{ recipe.recipe_image.url }}">

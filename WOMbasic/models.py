@@ -11,6 +11,7 @@ class Recipe(models.Model):
     id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     recipe_name = models.CharField(max_length=200, default="")
     publisher = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
+    #pubName = models.CharField(max_length=200, default=User.username)
     date_published = models.DateTimeField(default=datetime.now)
     recipe_description = models.TextField(default="")
     recipe_image = models.ImageField(null=True, blank=True, upload_to="images/", default="images/default_image.png")
@@ -31,19 +32,3 @@ class Recipe(models.Model):
     def get_absolute_url(self):
         return reverse('WOMbasic:recipe-details', args=(str(self.pk)))
 
-
-class Profile(models.Model):
-
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    @receiver(post_save, sender=User)  # add this
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            Profile.objects.create(user=instance)
-
-    @receiver(post_save, sender=User)  # add this
-    def save_user_profile(sender, instance, **kwargs):
-        instance.profile.save()
-
-    def __str__(self):
-        return str(self.user)
