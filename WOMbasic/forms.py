@@ -1,5 +1,4 @@
 
-from xml.etree.ElementTree import Comment
 from django import forms
 from .models import Recipe, Comment
 from django.contrib.auth.models import User
