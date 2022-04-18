@@ -20,7 +20,6 @@ class Recipe(models.Model):
     forked_fromId = models.IntegerField(default=1)
     likes = models.ManyToManyField(User, related_name='recipe_post')
 
-
     objects = models.Manager()
 
     def total_likes(self):

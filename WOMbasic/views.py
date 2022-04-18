@@ -1,7 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, DeleteView
-from django.http import HttpResponse
 from . models import Recipe
 from . forms import RecipeForm
 from django.urls import reverse_lazy
@@ -10,7 +9,6 @@ from django.shortcuts import get_object_or_404
 from . forms import RecipeForm, ForkForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
-
 
 class Profile(ListView):
     model = Recipe
