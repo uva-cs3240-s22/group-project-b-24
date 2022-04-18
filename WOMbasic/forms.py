@@ -1,12 +1,7 @@
 
 from django import forms
-<<<<<<< HEAD
-from django.forms.models import inlineformset_factory
-from .models import Recipe, Ingredients
-=======
 from .models import Recipe
 from django.contrib.auth.models import User
->>>>>>> 4ff4e201159140308d606e7edbe4a52691a3b3ac
 
 
 class RecipeForm(forms.ModelForm):
@@ -22,23 +17,6 @@ class RecipeForm(forms.ModelForm):
             'recipe_image': forms.FileInput(attrs={'class': 'form-control'}),
         }
 
-<<<<<<< HEAD
-class IngredientsForm(forms.ModelForm):
-    class Meta:
-        model = Ingredients
-        fields = (
-            'name',
-            'serving_amount'
-        )
-IngredientsFormSet = inlineformset_factory(
-    Recipe,
-    Ingredients,
-    IngredientsForm,
-    min_num=2,  # minimum number of forms that must be filled in
-    extra=1,  # number of empty forms to display
-    can_delete=False  # show a checkbox in each form to delete the row
-)
-=======
 
 class ForkForm(forms.ModelForm):
     class Meta:
@@ -56,4 +34,3 @@ class ForkForm(forms.ModelForm):
             'forked_from': forms.TextInput(attrs={'class': 'form-control', 'type': 'hidden'}),
             'forked_fromId': forms.NumberInput(attrs={'class': 'form-control', 'type': 'hidden'}),
         }
->>>>>>> 4ff4e201159140308d606e7edbe4a52691a3b3ac
