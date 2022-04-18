@@ -11,6 +11,7 @@ from . forms import RecipeForm, ForkForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 
+
 class Profile(ListView):
     model = Recipe
     template_name = 'WOMbasic/prof.html'
@@ -20,7 +21,7 @@ class Profile(ListView):
         return name
 
     def dispatch(self, request, *args, **kwargs):
-        self. uname = kwargs.get('username', "any_default")
+        self.uname = kwargs.get('username', "any_default")
         return super(Profile, self).dispatch(request, *args, **kwargs)
 
 

@@ -29,9 +29,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'WOMbasic:submit' %}">Create New Recipe</a>
                     </li>
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'WOMbasic:prof' user.username %}">My Recipes</a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
 

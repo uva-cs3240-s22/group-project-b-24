@@ -10,8 +10,8 @@
 <body>
 {% block content %}
 <h1> {{ recipe.recipe_name }}</h1>
- <a class="nav-link" href="{% url 'WOMbasic:prof' recipe.publisher.username %}">{{recipe.publisher.username}}</a>
-<small>By: {{ recipe.publisher.email }}</small>
+
+<small>By: <a href="{% url 'WOMbasic:prof' recipe.publisher.username %}">{{ recipe.publisher.username }}</a></small>
 
 {% if recipe.forked %}
 <br/>
@@ -43,19 +43,16 @@
 <h2>Comments</h2>
 <br/>
 {% if not post.comments.all %}
-    No Comments Yet<a href="{% url 'WOMbasic:add_comment' recipe.pk %}">
-        Add Comment</a>
+    No Comments Yet
 {% else %}
-    <a href="{% url 'WOMbasic:add_comment' recipe.pk %}">Add Comment</a>
     <br/><br/>
-    {% for comment in
-    post.comments.all %}
+    {% for comment in post.comments.all %}
         <strong>
             {{ comment.name }} -
-            {{ commen.date_added}}
+            {{ comment.date_added}}
         </strong>
         <br/>
-        { comment.body }}
+        {{ comment.body }}
         <br/><br/>  
     {% endfor %}
 {% endif %}
