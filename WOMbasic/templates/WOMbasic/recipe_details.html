@@ -42,23 +42,22 @@
 {% endif %}
 <h2>Comments</h2>
 <br/>
-{% if not post.comments.all % }
-    No Comments Yet <a href="{% url 'WOMbasic:add_comment' recipe.pk %}">Add Comment</a>
-    Add One</a>
+{% if not post.comments.all %}
+    No Comments Yet<a href="{% url 'WOMbasic:add_comment' recipe.pk %}">
+        Add Comment</a>
 {% else %}
     <a href="{% url 'WOMbasic:add_comment' recipe.pk %}">Add Comment</a>
     <br/><br/>
-            {% for comment in
-            post.comments.all %}
-                <strong>
-                    {{comment.name}} -
-                    {{ commen.date_added}}
-                </strong>
-                <br/>
-                {{ comment.body }}
-                <br/><br/>
-                
-            {% endfor %}
+    {% for comment in
+    post.comments.all %}
+        <strong>
+            {{ comment.name }} -
+            {{ commen.date_added}}
+        </strong>
+        <br/>
+        { comment.body }}
+        <br/><br/>  
+    {% endfor %}
 {% endif %}
 <br/>
 
