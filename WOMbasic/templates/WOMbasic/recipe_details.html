@@ -44,7 +44,6 @@
 <br/>
 {% if not post.comments.all % }
     No Comments Yet <a href="{% url 'WOMbasic:add_comment' recipe.pk %}">Add Comment</a>
-    Add One</a>
 {% else %}
     <a href="{% url 'WOMbasic:add_comment' recipe.pk %}">Add Comment</a>
     <br/><br/>
