@@ -25,6 +25,9 @@
 
 <br/>
 <hr>
+
+
+<hr>
 {% if recipe.recipe_image is not None %}
     <img src = "{{ recipe.recipe_image.url }}">
 <br>
@@ -37,5 +40,30 @@
 {% if recipe.publisher.email == user.email %}
     <a class="btn btn-danger btn-sm" href="{% url 'WOMbasic:delete' recipe.pk %}">Delete Recipe</a>
 {% endif %}
+<h2>Comments</h2>
+<br/>
+{% if not post.comments.all % }
+    No Comments Yet <a href="{% url 'WOMbasic:add_comment' recipe.pk %}">Add Comment</a>
+    Add One</a>
+{% else %}
+<a href="{% url 'WOMbasic:add_comment' recipe.pk %}">Add Comment</a>
+<br/><br/>
+        {% for comment in
+        post.comments.all %}
+            <strong>
+                {{comment.name}} -
+                {{ commen.date_added}}
+            </strong>
+            <br/>
+            {{ comment.body }}
+            <br/><br/>
+            
+        {% endfor %}
+{% endif %}
+<br/>
+
+<a href="{% url 'WOMbasic:add_comment' recipe.pk %}">Add Comment</a>
+
+<br/></br>
 {% endblock %}
 </body>
