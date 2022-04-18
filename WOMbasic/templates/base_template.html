@@ -30,7 +30,7 @@
                         <a class="nav-link" href="{% url 'WOMbasic:submit' %}">Create New Recipe</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'WOMbasic:prof' %}">My Recipes</a>
+                        <a class="nav-link" href="{% url 'WOMbasic:prof' user.username %}">My Recipes</a>
                     </li>
                 </ul>
             </div>
@@ -38,7 +38,7 @@
              <div>
                 <form class="d-flex" method=POST action="{% url 'WOMbasic:search-results' %}">
                     {% csrf_token %}
-                    <input class="form-control me-2" type="search" placeholder="Search by Recipe" aria-label="Search" name="searched">
+                    <input class="form-control me-2" type="search" placeholder="Search by Recipe/Username" aria-label="Search" name="searched">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>

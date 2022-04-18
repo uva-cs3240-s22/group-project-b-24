@@ -20,7 +20,7 @@
             <p class="card-text">{{ recipe.recipe_description }}</p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">{{ recipe.publisher.username }}</li>
+            <a href="{% url 'WOMbasic:prof' recipe.publisher.username %}" class="card-link">{{recipe.publisher.username}}</a>
           </ul>
             <ul class="list-group list-group-flush align-items-center">
                 {% if recipe.total_likes is 1 %}
@@ -33,6 +33,7 @@
             <a href="{% url 'WOMbasic:recipe-details' recipe.pk %}" class="card-link">Go to recipe</a>
           </div>
         </div>
+        <br>
     {% endfor %}
 </div>
 <p> <a href="{% url 'WOMbasic:submit' %}">Create New Recipe</a></p>
