@@ -10,13 +10,32 @@
 
 <br>
 {% if user.is_authenticated %}
-<p>Welcome, {{ user.username }}!</p>
-<ul>
+<div class="row justify-content-center">
     {% for recipe in object_list %}
-    <li><a href="{% url 'WOMbasic:recipe-details' recipe.pk %}">{{ recipe.recipe_name }}</a> || {{ recipe.publisher }}<br>
-        {{ recipe.recipe_description }}</li>
+        <div class="card mt-3 mx-3" style="width: 26rem;">
+          <img class="card-img-top" src="{{ recipe.recipe_image.url }}" alt='no file'>
+
+          <div class="card-body">
+            <h5 class="card-title">{{ recipe.recipe_name }}</h5>
+            <p class="card-text">{{ recipe.recipe_description }}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <a href="{% url 'WOMbasic:prof' recipe.publisher.username %}" class="card-link">{{recipe.publisher.username}}</a>
+          </ul>
+            <ul class="list-group list-group-flush align-items-center">
+                {% if recipe.total_likes is 1 %}
+                <li class="list-group-item">{{ recipe.total_likes }} Like</li>
+                {% else %}
+                <li class="list-group-item">{{ recipe.total_likes }} Likes</li>
+                {% endif %}
+          </ul>
+          <div class="card-body">
+            <a href="{% url 'WOMbasic:recipe-details' recipe.pk %}" class="card-link">Go to recipe</a>
+          </div>
+        </div>
+        <br>
     {% endfor %}
-</ul>
+</div>
 <p> <a href="{% url 'WOMbasic:submit' %}">Create New Recipe</a></p>
 
 {% else %}
