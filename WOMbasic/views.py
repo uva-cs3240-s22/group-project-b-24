@@ -1,8 +1,9 @@
+
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, DeleteView
-from . models import Recipe
-from . forms import RecipeForm
+from .models import Recipe, Comment
+from .forms import RecipeForm, CommentForm
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
@@ -28,6 +29,16 @@ class SubmitRecipe(CreateView):
     form_class = RecipeForm
     template_name = 'WOMbasic/submit.html'
     #fields = '__all__'
+    success_url = reverse_lazy('WOMbasic:home')
+
+class AddCommentView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'WOMbasic/add_comment.html'
+    #fields = '__all__'
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
     success_url = reverse_lazy('WOMbasic:home')
 
 

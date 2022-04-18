@@ -1,6 +1,6 @@
 
 from django import forms
-from .models import Recipe
+from .models import Recipe, Comment
 from django.contrib.auth.models import User
 
 
@@ -33,4 +33,14 @@ class ForkForm(forms.ModelForm):
                 attrs={'class': 'form-control', 'checked': True, 'value': 'on', 'id': 'forking', 'type': 'hidden'}),
             'forked_from': forms.TextInput(attrs={'class': 'form-control', 'type': 'hidden'}),
             'forked_fromId': forms.NumberInput(attrs={'class': 'form-control', 'type': 'hidden'}),
+        }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('name', 'body')
+
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'body': forms.Textarea(attrs={'class': 'form-control'}),
         }
