@@ -34,9 +34,9 @@ class Recipe(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(Recipe, related_name="comments", on_delete = models.CASCADE)
+    recipe = models.ForeignKey(Recipe, related_name ="comments", on_delete = models.CASCADE)
     name = models.CharField(max_length=255)
     body = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return '%s - %s' %(self.post.recipe_name, self.name)
+        return '%s - %s' %(self.recipe.recipe_name, self.name)
