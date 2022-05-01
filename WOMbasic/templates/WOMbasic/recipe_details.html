@@ -17,9 +17,9 @@
 </style>
 <center>
     <h1>{{ recipe.recipe_name }}</h1>
-    <h5>By: <a href="{% url 'WOMbasic:prof' recipe.publisher.username %}">{{ recipe.publisher.username }}</a></h5>
+    <h6>By: <a href="{% url 'WOMbasic:prof' recipe.publisher.username %}">{{ recipe.publisher.username }}</a></h6>
     {% if recipe.forked %}
-    <h5>Recipe Forked from: <a href="{% url 'WOMbasic:recipe-details' recipe.forked_fromId %}">{{ recipe.forked_from }}</a></h5>
+    <h6>Recipe Forked from: <a href="{% url 'WOMbasic:recipe-details' recipe.forked_fromId %}">{{ recipe.forked_from }}</a></h6>
     {% endif %}
     <br>
     {% if recipe.recipe_image is not None %}
@@ -49,8 +49,13 @@
 {% endif %}
 </div>
 
+<h4>Ingredients</h4>
+{{ recipe.ingredients|safe}}
 
+<h4>Directions</h4>
+{{ recipe.recipe_steps }}
 
+<hr>
 <h2>Comments</h2>
 <br/>
 {% if not recipe.comments.all %}
