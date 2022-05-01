@@ -7,16 +7,29 @@
     <title>{{ recipe.recipe_name }}</title>
 </head>
 
-<body>
+
 {% block content %}
-<h1> {{ recipe.recipe_name }}</h1>
+<style>
+    img {
+        height: 300px;
+        width: auto;
+    }
+</style>
+<center>
+    <h1>{{ recipe.recipe_name }}</h1>
+    <h5>By: <a href="{% url 'WOMbasic:prof' recipe.publisher.username %}">{{ recipe.publisher.username }}</a></h5>
+    {% if recipe.forked %}
+    <h5>Recipe Forked from: <a href="{% url 'WOMbasic:recipe-details' recipe.forked_fromId %}">{{ recipe.forked_from }}</a></h5>
+    {% endif %}
+    <br>
+    {% if recipe.recipe_image is not None %}
+    <img src = "{{ recipe.recipe_image.url }}">
+    {% endif %}
+<br>
+</center>
 
-<small>By: <a href="{% url 'WOMbasic:prof' recipe.publisher.username %}">{{ recipe.publisher.username }}</a></small>
 
-{% if recipe.forked %}
-<br/>
-<small>Recipe Forked from: <a href="{% url 'WOMbasic:recipe-details' recipe.forked_fromId %}">{{ recipe.forked_from }}</a></small>
-{% endif %}
+
 <br>
 <form action="{% url 'WOMbasic:like_recipe' recipe.pk %}" method="POST">
     {% csrf_token %}
@@ -27,23 +40,16 @@
     {% endif %}
 </form>
 <br/>
-<small>
-<a class="btn btn-dark btn-sm" href="{% url 'WOMbasic:home' %}">Back to Home</a>
-</small>
-{% if recipe.publisher.email == user.email %}
-<a class="btn btn-danger btn-sm" href="{% url 'WOMbasic:delete' recipe.pk %}">Delete Recipe</a>
+<div class="homebutton">
+    <a class="btn btn-dark btn-sm" href="{% url 'WOMbasic:home' %}">Back to Home</a>
+</div>
+<div>
+{% if recipe.publisher.id == user.id %}
+    <a class="btn btn-danger btn-sm" href="{% url 'WOMbasic:delete' recipe.pk %}">Delete Recipe</a>
 {% endif %}
+</div>
 
 
-
-
-<hr>
-{% if recipe.recipe_image is not None %}
-    <img src = "{{ recipe.recipe_image.url }}">
-<br>
-{% endif %}
-{{ recipe.recipe_description }}
-<br><br>
 
 <h2>Comments</h2>
 <br/>
@@ -61,11 +67,10 @@
             </div>
         </div>
         {% endfor %}
-{% endif %}
+    {% endif %}
 <br/>
 
 <a href="{% url 'WOMbasic:add_comment' recipe.pk %}">Add Comment</a>
 
 <br/>
 {% endblock %}
-</body>
