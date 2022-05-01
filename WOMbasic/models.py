@@ -10,16 +10,20 @@ from django.db.models.signals import post_save #add this
 # Create your models here.
 class Recipe(models.Model):
     id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-    recipe_name = models.CharField(max_length=200, default="")
+    recipe_name = models.CharField(max_length=200, default="", verbose_name='Name of Recipe')
     publisher = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
-    #pubName = models.CharField(max_length=200, default=User.username)
     date_published = models.DateTimeField(default=datetime.now)
-    recipe_description = models.TextField(default="")
-    recipe_image = models.ImageField(null=True, blank=True, upload_to="images/", default="images/default_image.png")
+    recipe_description = models.TextField(default="", verbose_name='Brief Description')
+    recipe_steps = models.TextField(default="", verbose_name='Step-by-Step Instructions')
+    ingredients = models.TextField(default="")
+    recipe_image = models.ImageField(null=True, blank=True, upload_to="images/", default="images/default_image.png",
+                                     verbose_name='Picture of Recipe')
     forked = models.BooleanField(default=False)
     forked_from = models.TextField(default="")
     forked_fromId = models.IntegerField(default=1)
     likes = models.ManyToManyField(User, related_name='recipe_post')
+
+
 
     objects = models.Manager()
 
