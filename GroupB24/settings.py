@@ -31,9 +31,6 @@ SECRET_KEY = '8e*0%l65)w+yw$opcz8t7k!tptpib7c(j((dxa*sk8m*kws*e3'
 
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '8e*0%l65)w+yw$opcz8t7k!tptpib7c(j((dxa*sk8m*kws*e3'
-
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
