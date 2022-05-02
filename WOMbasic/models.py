@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.dispatch import receiver #add this
 from django.db.models.signals import post_save #add this
+from django_resized import ResizedImageField
 
 
 # Create your models here.
@@ -16,7 +17,7 @@ class Recipe(models.Model):
     recipe_description = models.TextField(default="", verbose_name='Brief Description')
     recipe_steps = models.TextField(default="", verbose_name='Step-by-Step Instructions')
     ingredients = models.TextField(default="")
-    recipe_image = models.ImageField(null=True, blank=True, upload_to="images/", default="images/default_image.png",
+    recipe_image = ResizedImageField(size=[500, 500], crop=['middle', 'center'], quality=100, null=True, blank=True, upload_to="images/", default="images/default_image.png",
                                      verbose_name='Picture of Recipe')
     forked = models.BooleanField(default=False)
     forked_from = models.TextField(default="")
