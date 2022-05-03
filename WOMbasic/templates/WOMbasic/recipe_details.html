@@ -18,6 +18,9 @@
         white-space: pre-line;
         display: inline-block;
     }
+    .margins {
+        margin-left:40px;
+     }
 </style>
 <center>
     <h1>{{ recipe.recipe_name }}</h1>
@@ -31,17 +34,21 @@
     {% endif %}
 </center>
 <br/>
+<div class="margins">
  <h4>Ingredients</h4>
     <div class="lists">
     {{ recipe.ingredients}}
     </div>
+</div>
 <br/>
 <br/>
-<br/>
+
+<div class="margins">
 <h4>Directions</h4>
     <div class="lists">
     {{ recipe.recipe_steps }}
     </div>
+</div>
 <br/>
 <br/>
 <center>
@@ -68,11 +75,9 @@
 <br/>
 <hr>
 <h2>Comments</h2>
-<br/>
-{% if not recipe.comments.all %}
 
-No Comments Yet<a href="{% url 'WOMbasic:add_comment' recipe.pk %}">
-Add Comment</a>
+{% if not recipe.comments.all %}
+No Comments Yet
 {% else %}
 {% for comment in recipe.comments.all %}
 <strong>
