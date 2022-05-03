@@ -1,6 +1,7 @@
 
 {% extends 'base_template.html' %}
 {% load static %}
+{% load socialaccount %}
 
 
 {% block content %}
@@ -19,5 +20,8 @@
     document.getElementById("pub").value = name;
 
 </script>
+{% else %}
+<br>
+<a class="btn btn-primary" href="{% provider_login_url 'google' %}">Login with Google</a>
 {% endif %}
 {% endblock %}

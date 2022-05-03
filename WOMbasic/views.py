@@ -32,6 +32,7 @@ class SubmitRecipe(CreateView):
     #fields = '__all__'
     success_url = reverse_lazy('WOMbasic:home')
 
+
 class AddCommentView(CreateView):
     model = Comment
     form_class = CommentForm

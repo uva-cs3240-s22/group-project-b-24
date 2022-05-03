@@ -3,7 +3,10 @@
 {% endblock %}
 {% block content %}
 
+{% if user.is_authenticated %}
+<center>
 <h1>Add Comment... </h1>
+</center>
 </br><br/>
 <div class="form-group">
     <form method="POST" >
@@ -12,4 +15,8 @@
         <button class="btn btn-secondary">Add Comment</button>
     </form>
   </div>
+
+{% else %}
+<a class="btn btn-primary" href="{% provider_login_url 'google' %}">Login with Google</a>
+{% endif %}
 {% endblock %}

@@ -6,6 +6,7 @@
 
 
 {% block content %}
+{% if user.is_authenticated %}
 <br>
 <h1>
     <p class="text-center">{{view.uname}}'s Cookbook </p>
@@ -40,5 +41,7 @@
         {% endif %}
     {% endfor %}
 </div>
-
+{% else %}
+<a class="btn btn-primary" href="{% provider_login_url 'google' %}">Login with Google</a>
+{% endif %}
 {% endblock %}

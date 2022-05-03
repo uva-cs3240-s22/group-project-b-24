@@ -9,94 +9,107 @@
 
 
 {% block content %}
-<style>
-    img {
-        height: 300px;
-        width: auto;
-    }
-    .lists {
-        white-space: pre-line;
-        display: inline-block;
-    }
-    .margins {
-        margin-left:40px;
-     }
-</style>
-<center>
-    <h1>{{ recipe.recipe_name }}</h1>
-    <h6>By: <a href="{% url 'WOMbasic:prof' recipe.publisher.username %}">{{ recipe.publisher.username }}</a></h6>
-    {% if recipe.forked %}
-    <h6>Recipe Forked from: <a href="{% url 'WOMbasic:recipe-details' recipe.forked_fromId %}">{{ recipe.forked_from }}</a></h6>
-    {% endif %}
-    <br>
-    {% if recipe.recipe_image is not None %}
-    <img src = "{{ recipe.recipe_image.url }}">
-    {% endif %}
-</center>
-<br/>
-<div class="margins">
- <h4>Ingredients</h4>
-    <div class="lists">
-    {{ recipe.ingredients}}
+{% if user.is_authenticated %}
+    <style>
+        img {
+            height: 300px;
+            width: auto;
+        }
+        .lists {
+            white-space: pre-line;
+            display: inline-block;
+        }
+        .margins {
+            margin-left:40px;
+         }
+    </style>
+    <center>
+        <h1>{{ recipe.recipe_name }}</h1>
+        <h6>By: <a href="{% url 'WOMbasic:prof' recipe.publisher.username %}">{{ recipe.publisher.username }}</a></h6>
+        {% if recipe.forked %}
+        <h6>Recipe Forked from: <a href="{% url 'WOMbasic:recipe-details' recipe.forked_fromId %}">{{ recipe.forked_from }}</a></h6>
+        {% endif %}
+        <br>
+        {% if recipe.recipe_image is not None %}
+        <img src = "{{ recipe.recipe_image.url }}">
+        {% endif %}
+    </center>
+    <br/>
+    <div class="margins">
+     <h4>Ingredients</h4>
+        <div class="lists">
+        {{ recipe.ingredients}}
+        </div>
     </div>
-</div>
-<br/>
-<br/>
+    <br/>
+    <br/>
 
-<div class="margins">
-<h4>Directions</h4>
-    <div class="lists">
-    {{ recipe.recipe_steps }}
+    <div class="margins">
+    <h4>Directions</h4>
+        <div class="lists">
+        {{ recipe.recipe_steps }}
+        </div>
     </div>
-</div>
-<br/>
-<br/>
-<center>
-    <br>
-<form action="{% url 'WOMbasic:like_recipe' recipe.pk %}" method="POST">
-    {% csrf_token %}
-    {% if total_likes == 1 %}
-        <button type="submit" name="recipe_id" value="{{ recipe.id }}" class="btn btn-primary btn-sm">Like</button> - {{ total_likes }} Like
+    <br/>
+    <br/>
+    <center>
+        <br>
+    <form action="{% url 'WOMbasic:like_recipe' recipe.pk %}" method="POST">
+        {% csrf_token %}
+        {% if total_likes == 1 %}
+            <button type="submit" name="recipe_id" value="{{ recipe.id }}" class="btn btn-primary btn-sm">Like</button> - {{ total_likes }} Like
+        {% else %}
+            <button type="submit" name="recipe_id" value="{{ recipe.id }}" class="btn btn-primary btn-sm">Like</button> - {{ total_likes }} Likes
+        {% endif %}
+    </form>
+
+    <div class="homebutton">
+        <a class="btn btn-dark btn-sm" href="{% url 'WOMbasic:home' %}">Back to Home</a>
+
+    <a class="btn btn-info btn-sm" href="{% url 'WOMbasic:fork-submit' recipe.pk %}">Fork Recipe</a>
+
+    {% if recipe.publisher.id == user.id or user.is_superuser %}
+        <a class="btn btn-danger btn-sm" href="{% url 'WOMbasic:delete' recipe.pk %}">Delete Recipe</a>
+    {% endif %}
+    </div>
+    </center>
+    <br/>
+    <hr>
+    <center>
+    <h2>Comments</h2>
+        <div>
+        <a class="btn btn-outline-info btn-sm" href="{% url 'WOMbasic:add_comment' recipe.pk %}">+</a>
+        </div>
+    {% if not recipe.comments.all %}
+    No Comments Yet
     {% else %}
-        <button type="submit" name="recipe_id" value="{{ recipe.id }}" class="btn btn-primary btn-sm">Like</button> - {{ total_likes }} Likes
+    {% for comment in recipe.comments.all %}
+            <div class="card my-2 mx-4">
+                <div class="card-header">
+                    <i>Submitted: {{ comment.date_added }} </i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ comment.name }}</h5>
+                    <p class="card-text"> {{ comment.body }}</p>
+                </div>
+                <ul class="list-group list-group-flush align-items-center">
+                     <div class="card-body">
+                        <form action="{% url 'WOMbasic:comment_delete' comment.pk %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-danger btn-sm" value="Delete Comment">Delete Comment</button>
+                        </form>
+                    </div>
+                </ul>
+            </div>
+
+    {% endfor %}
     {% endif %}
-</form>
+    </center>
+    <br/>
+    <br/>
 
-<div class="homebutton">
-    <a class="btn btn-dark btn-sm" href="{% url 'WOMbasic:home' %}">Back to Home</a>
-
-<a class="btn btn-info btn-sm" href="{% url 'WOMbasic:fork-submit' recipe.pk %}">Fork Recipe</a>
-
-{% if recipe.publisher.id == user.id or user.is_superuser %}
-    <a class="btn btn-danger btn-sm" href="{% url 'WOMbasic:delete' recipe.pk %}">Delete Recipe</a>
-{% endif %}
-</div>
-</center>
-<br/>
-<hr>
-<h2>Comments</h2>
-
-{% if not recipe.comments.all %}
-No Comments Yet
 {% else %}
-{% for comment in recipe.comments.all %}
-<strong>
-{{ comment.name }} -
-{{ comment.date_added}}
-</strong>
-<br/>
-{{ comment.body }}
-<br/><br/> 
-<form action="{% url 'WOMbasic:comment_delete' comment.pk %}" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Delete Comment">
-</form>
-{% endfor %}
+<a class="btn btn-primary" href="{% provider_login_url 'google' %}">Login with Google</a>
 {% endif %}
 
-<br/>
-
-<a href="{% url 'WOMbasic:add_comment' recipe.pk %}">Add Comment</a>
-
-<br/>
 {% endblock %}
