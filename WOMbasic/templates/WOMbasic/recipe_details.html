@@ -53,7 +53,11 @@ Add Comment</a>
 </strong>
 <br/>
 {{ comment.body }}
-<br/><br/>  
+<br/><br/> 
+<form action="{% url 'WOMbasic:comment_delete' comment.pk %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete Comment">
+</form>
 {% endfor %}
 {% endif %}
 <br/>
