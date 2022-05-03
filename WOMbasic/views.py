@@ -96,3 +96,12 @@ def LikeView(request, pk):
     recipe = get_object_or_404(Recipe, id=request.POST.get('recipe_id'))
     recipe.likes.add(request.user)
     return HttpResponseRedirect(reverse('WOMbasic:recipe-details', args=[str(pk)]))
+
+def comment_delete(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)  
+    if request.method == 'POST':        
+        comment.delete()                     
+        return redirect('/')             
+
+    return render(request, 'WOMbasic:recipe-details', {'comment': comment})
+
