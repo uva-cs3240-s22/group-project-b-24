@@ -101,13 +101,11 @@ def LikeView(request, pk):
     recipe = get_object_or_404(Recipe, id=request.POST.get('recipe_id'))
     recipe.likes.add(request.user)
     return HttpResponseRedirect(reverse('WOMbasic:recipe-details', args=[str(pk)]))
-    
+
 def comment_delete(request, pk):
-    comment = get_object_or_404(Comment, pk=pk)  # Get your current cat
-    if request.method == 'POST':         # If method is POST,
-        comment.delete()                     # delete the cat.
-        return redirect('/')             # Finally, redirect to the homepage.
+    comment = get_object_or_404(Comment, pk=pk)  
+    if request.method == 'POST':        
+        comment.delete()                     
+        return redirect('/')             
 
     return render(request, 'WOMbasic:recipe-details', {'comment': comment})
-    # If method is not POST, render the default template.
-    # *Note*: Replace 'template_name.html' with your corresponding template name.
