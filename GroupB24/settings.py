@@ -27,18 +27,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xk)-_96=6fu!4kxi2+1id@!eb@qgarxd*t9#my@1hy)6ow*41@'
+SECRET_KEY = '8e*0%l65)w+yw$opcz8t7k!tptpib7c(j((dxa*sk8m*kws*e3'
 
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-j8ml3&6am0u)7*otv*f+)&^0d%byauf=!1fm0lhwegca@oe^t_'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -230,3 +227,10 @@ DEFAULT_FILE_STORAGE = 'GroupB24.storages.MediaStore'
 
 
 #django_heroku.settings(locals(), test_runner=False, staticfiles=False)
+
+DJANGORESIZED_DEFAULT_SIZE = [640, 480]
+DJANGORESIZED_DEFAULT_QUALITY = 100
+DJANGORESIZED_DEFAULT_KEEP_META = True
+DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'JPEG'
+DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'JPEG': ".jpg"}
+DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
