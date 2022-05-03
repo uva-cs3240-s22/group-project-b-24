@@ -109,3 +109,4 @@ def comment_delete(request, pk):
         return redirect('/')             
 
     return render(request, 'WOMbasic:recipe-details', {'comment': comment})
+
